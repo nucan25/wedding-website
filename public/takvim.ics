@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Düğün Sitesi//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:kina-2027@dugun-sitesi
+DTSTAMP:20261014T000000Z
+DTSTART;TZID=Europe/Istanbul:20270129T193000
+DTEND;TZID=Europe/Istanbul:20270129T220000
+SUMMARY:Kına Gecesi
+LOCATION:TODO: Kına mekânı
+DESCRIPTION:Kına gecesi\nYer: TODO: Kına mekânı\nAdres: TODO: Kına mekân adresi
+END:VEVENT
+BEGIN:VEVENT
+UID:dugun-2027@dugun-sitesi
+DTSTAMP:20261014T000000Z
+DTSTART;TZID=Europe/Istanbul:20270131T170000
+DTEND;TZID=Europe/Istanbul:20270131T220000
+SUMMARY:Sümeyye & Nurullah Düğün Davetiyesi
+LOCATION:TODO: Mekân adı
+DESCRIPTION:Düğün davetiyesi\nMekan: TODO: Mekân adı\nAdres: TODO: Mekân adresi
+END:VEVENT
+BEGIN:VEVENT
+UID:gelin-cikarma-2027@dugun-sitesi
+DTSTAMP:20261014T000000Z
+DTSTART;TZID=Europe/Istanbul:20270131T083000
+DTEND;TZID=Europe/Istanbul:20270131T100000
+SUMMARY:Sabah Gelin Çıkarma
+LOCATION:TODO: Sabah gelin çıkarma yeri
+DESCRIPTION:Sabah gelin çıkarma\nYer: TODO: Sabah gelin çıkarma yeri\nAdres: TODO: Sabah gelin çıkarma adresi
+END:VEVENT
+END:VCALENDAR
