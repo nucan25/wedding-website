@@ -56,11 +56,11 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
         <img
           src={heroImage}
           alt={heroAlt}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover opacity-35 blur-[1px]"
           width="1440"
           height="960"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#f7f3ee]/30 via-[#f7f3ee]/50 to-[#f7f3ee]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f7f3ee]/35 via-[#f7f3ee]/55 to-[#f7f3ee]" />
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl items-center px-4 pb-10 pt-16 sm:px-8 lg:px-12">
@@ -68,8 +68,20 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="mx-auto w-full max-w-3xl text-center"
+          className="relative z-10 mx-auto w-full max-w-3xl text-center"
         >
+          <div className="mb-5 flex justify-center">
+            <div className="overflow-hidden rounded-[28px] border border-[#d9c9b9] bg-white/70 p-1.5 shadow-[0_20px_40px_rgba(86,67,54,0.12)] backdrop-blur-sm">
+              <img
+                src={heroImage}
+                alt={heroAlt}
+                className="h-28 w-28 rounded-[22px] object-cover sm:h-36 sm:w-36"
+                width="144"
+                height="144"
+              />
+            </div>
+          </div>
+
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9c9b9] bg-white/60 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5c4b3b] backdrop-blur-sm sm:mb-6 sm:px-4 sm:text-[11px]">
             <CalendarHeart size={14} className="sm:h-4 sm:w-4" />
             {activeEvent.title}
