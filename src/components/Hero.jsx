@@ -24,26 +24,11 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
     if (!audioRef.current || !audioSource) return;
 
     const audio = audioRef.current;
-    const wasPlaying = !audio.paused;
     audio.src = audioSource;
     audio.loop = true;
-
-    const playAudio = async () => {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error('Otomatik müzik çalma engellendi:', error);
-        setIsPlaying(false);
-      }
-    };
-
-    if (wasPlaying) {
-      playAudio();
-      return;
-    }
-
-    playAudio();
+    audio.preload = 'auto';
+    audio.load();
+    setIsPlaying(false);
   }, [audioSource]);
 
   const toggleMusic = async () => {
