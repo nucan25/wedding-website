@@ -4,29 +4,29 @@ PRODID:-//Düğün Sitesi//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:kina-2027@dugun-sitesi
-DTSTAMP:20261014T000000Z
-DTSTART;TZID=Europe/Istanbul:20270129T193000
-DTEND;TZID=Europe/Istanbul:20270129T220000
+DTSTAMP:20261112T000000Z
+DTSTART;TZID=Europe/Istanbul:20270128T193000
+DTEND;TZID=Europe/Istanbul:20270128T220000
 SUMMARY:Kına Gecesi
-LOCATION:TODO: Kına mekânı
-DESCRIPTION:Kına gecesi\nYer: TODO: Kına mekânı\nAdres: TODO: Kına mekân adresi
+LOCATION:Erzurum / Kına Gecesi
+DESCRIPTION:Kına gecesi\nYer: Erzurum / Kına Gecesi\nAdres: Erzurum / Kına gecesi mekânı
 END:VEVENT
 BEGIN:VEVENT
 UID:dugun-2027@dugun-sitesi
-DTSTAMP:20261014T000000Z
-DTSTART;TZID=Europe/Istanbul:20270131T170000
-DTEND;TZID=Europe/Istanbul:20270131T220000
+DTSTAMP:20261112T000000Z
+DTSTART;TZID=Europe/Istanbul:20270130T180000
+DTEND;TZID=Europe/Istanbul:20270130T220000
 SUMMARY:Sümeyye & Nurullah Düğün Davetiyesi
-LOCATION:TODO: Mekân adı
-DESCRIPTION:Düğün davetiyesi\nMekan: TODO: Mekân adı\nAdres: TODO: Mekân adresi
+LOCATION:Armada Düğün ve Kongre Salonu
+DESCRIPTION:Düğün davetiyesi\nMekan: Armada Düğün ve Kongre Salonu\nAdres: Harput Mahallesi, 5. Sk. No:17, 25070 Palandöken/Erzurum
 END:VEVENT
 BEGIN:VEVENT
 UID:gelin-cikarma-2027@dugun-sitesi
-DTSTAMP:20261014T000000Z
-DTSTART;TZID=Europe/Istanbul:20270131T083000
-DTEND;TZID=Europe/Istanbul:20270131T100000
+DTSTAMP:20261112T000000Z
+DTSTART;TZID=Europe/Istanbul:20270130T100000
+DTEND;TZID=Europe/Istanbul:20270130T110000
 SUMMARY:Sabah Gelin Çıkarma
-LOCATION:TODO: Sabah gelin çıkarma yeri
-DESCRIPTION:Sabah gelin çıkarma\nYer: TODO: Sabah gelin çıkarma yeri\nAdres: TODO: Sabah gelin çıkarma adresi
+LOCATION:Yunus Emre Mah. Hürmet Sok. Doğuşehir Sitesi A Blok, Kayakyolu, Erzurum
+DESCRIPTION:Sabah gelin çıkarma\nYer: Yunus Emre Mah. Hürmet Sok. Doğuşehir Sitesi A Blok, Kayakyolu, Erzurum\nAdres: Yunus Emre Mah. Hürmet Sok. Doğuşehir Sitesi A Blok, Kayakyolu, Erzurum
 END:VEVENT
 END:VCALENDAR
