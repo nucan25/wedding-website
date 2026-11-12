@@ -71,13 +71,13 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
           className="relative z-10 mx-auto w-full max-w-3xl text-center"
         >
           <div className="mb-5 flex justify-center">
-            <div className="overflow-hidden rounded-[28px] border border-[#d9c9b9] bg-white/70 p-1.5 shadow-[0_20px_40px_rgba(86,67,54,0.12)] backdrop-blur-sm">
+            <div className="overflow-hidden rounded-[30px] border border-[#d9c9b9] bg-white/75 p-1.75 shadow-[0_22px_44px_rgba(86,67,54,0.12)] backdrop-blur-sm">
               <img
                 src={heroImage}
                 alt={heroAlt}
-                className="h-28 w-28 rounded-[22px] object-cover sm:h-36 sm:w-36"
-                width="144"
-                height="144"
+                className="h-32 w-32 rounded-[24px] object-cover sm:h-40 sm:w-40"
+                width="160"
+                height="160"
               />
             </div>
           </div>
