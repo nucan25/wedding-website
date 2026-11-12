@@ -1,4 +1,4 @@
-import { MapPin, CarFront, Hotel, Navigation } from 'lucide-react';
+import { MapPin, CarFront, Navigation } from 'lucide-react';
 
 function Venue({ activeEvent }) {
   return (
@@ -56,11 +56,7 @@ function Venue({ activeEvent }) {
             <div className="space-y-4 pt-3 text-sm text-[#473f3b]">
               <div className="flex items-start gap-3">
                 <CarFront className="mt-0.5 text-[#7a9280]" size={18} />
-                <p>TODO: Ulaşım bilgisi ve otopark notu. </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Hotel className="mt-0.5 text-[#7a9280]" size={18} />
-                <p>TODO: Yakın konaklama önerileri veya rehber.</p>
+                <p>Yakınlarda kolay ulaşım için Google Haritalar yönlendirmesini kullanabilirsiniz.</p>
               </div>
             </div>
           </div>
