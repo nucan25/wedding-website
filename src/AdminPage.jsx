@@ -6,6 +6,11 @@ import {
   readAdminOverrides,
   saveAdminOverrides,
 } from './config';
+import {
+  buildProjectAssetManifest,
+  downloadProjectAssetManifest,
+  exportProjectAssetsToSelectedDirectory,
+} from './adminAssetExport';
 
 const getDefaultDraft = () => {
   const config = getWeddingConfig();
@@ -260,6 +265,34 @@ function AdminPage() {
     }, 250);
   };
 
+  const handleExportProjectAssets = async () => {
+    if (typeof window === 'undefined') return;
+
+    const config = getWeddingConfig();
+    const manifest = buildProjectAssetManifest(config);
+
+    if (!('showDirectoryPicker' in window)) {
+      downloadProjectAssetManifest(config, 'wedding-admin-assets.json');
+      setStatus('Dosya indirildi. İndirdiğiniz JSON dosyasını projeye ekleyip ardından commit/push yapın.');
+      return;
+    }
+
+    try {
+      const projectRoot = await window.showDirectoryPicker({ mode: 'readwrite' });
+      const exported = await exportProjectAssetsToSelectedDirectory(config, projectRoot);
+
+      if (exported) {
+        setStatus('Fotoğraflar proje klasörünün public/uploads içine kaydedildi. Şimdi commit/push yapın.');
+        return;
+      }
+
+      setStatus('Klasör erişimi reddedildi. Lütfen yeniden deneyin veya JSON olarak indirip manuel ekleyin.');
+    } catch {
+      downloadProjectAssetManifest(config, 'wedding-admin-assets.json');
+      setStatus('Klasör seçme özelliği desteklenmiyor. JSON dosyası indirildi; projeye ekleyip yayınlayın.');
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#f7f3ee] px-4">
@@ -498,7 +531,10 @@ function AdminPage() {
           </section>
         </div>
 
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" onClick={handleExportProjectAssets} className="inline-flex items-center justify-center rounded-full border border-[#cbb7a3] bg-[#fffaf5] px-6 py-3 text-sm font-medium text-[#352d29] transition hover:bg-[#f3e9df]">
+            Projeye foto ekle
+          </button>
           <button type="button" onClick={handleSave} className="inline-flex items-center justify-center rounded-full bg-[#2f2a27] px-6 py-3 text-sm font-medium text-[#f8f3ee] transition hover:bg-[#1d1918]">
             Değişiklikleri kaydet
           </button>
