@@ -41,7 +41,7 @@ export const weddingConfig = {
   googleMapsEmbedUrl:
     'https://www.google.com/maps?q=Armada%20D%C3%BC%C4%9F%C3%BCn%20Ve%20Kongre%20Salonu%2C%20Harput%20Mahallesi%2C%205.%20Sk.%20No%3A17%2C%2025070%20Paland%C3%B6ken%2FErzurum&output=embed',
   driveFolderUrl: 'https://drive.google.com/drive/folders/17LQjoeVtZhgtTUG-sh0-sXznDqeFZrBB?usp=sharing',
-  siteUrl: 'TODO: https://www.ornekdugun.com',
+  siteUrl: 'https://simeyye-nurullah-wedding.nucan1996.workers.dev',
   musicTitle: 'Aşkın Mevsimi Olmaz Ki',
   musicUrl: '/audio/dugun.mp3',
   musicByEvent: {
