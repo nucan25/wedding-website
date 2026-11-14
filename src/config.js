@@ -79,11 +79,12 @@ export const weddingConfig = {
       id: 'event-kina',
       title: 'Kına Gecesi',
       date: '2027-01-28T19:30:00+03:00',
-      venueName: 'Kına Gecesi',
-      venueAddress: 'Erzurum / Kına gecesi mekânı',
-      directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Erzurum+K%C4%B1na+Gecesi',
+      venueName: 'Canlar Düğün Salonu',
+      venueAddress: 'Osmangazi, 13. Ara Sk., 25070 Palandöken/Erzurum',
+      directionsUrl:
+        'https://www.google.com/maps/search/?api=1&query=Canlar+D%C3%BC%C4%9F%C3%BCn+Salonu+Osmangazi+13.+Ara+Sk.+25070+Paland%C3%B6ken%2FErzurum',
       googleMapsEmbedUrl:
-        'https://www.google.com/maps?q=Erzurum%20K%C4%B1na%20Gecesi&output=embed',
+        'https://www.google.com/maps?q=Osmangazi%2C%2013.%20Ara%20Sk.%2C%2025070%20Paland%C3%B6ken%2FErzurum&output=embed',
       description: 'Kına gecesi için özel karşılama, aile sıcaklığı ve kısa programa ait açıklama.',
       heroImage: story2,
       coverAlt: 'Kına gecesi kapak görseli',
@@ -106,9 +107,10 @@ export const weddingConfig = {
   kınaEvent: {
     title: 'Kına Gecesi',
     date: '2027-01-28T19:30:00+03:00',
-    venueName: 'Kına Gecesi',
-    venueAddress: 'Erzurum / Kına gecesi mekânı',
-    directionsUrl: 'https://www.google.com/maps/search/?api=1&query=Erzurum+K%C4%B1na+Gecesi',
+    venueName: 'Canlar Düğün Salonu',
+    venueAddress: 'Osmangazi, 13. Ara Sk., 25070 Palandöken/Erzurum',
+    directionsUrl:
+      'https://www.google.com/maps/search/?api=1&query=Canlar+D%C3%BC%C4%9F%C3%BCn+Salonu+Osmangazi+13.+Ara+Sk.+25070+Paland%C3%B6ken%2FErzurum',
     description: 'Kına gecesi için özel bir karşılama ve aile toplantısı.',
   },
   gelinCikarmaEvent: {

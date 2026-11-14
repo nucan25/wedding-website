@@ -63,26 +63,26 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
         <div className="absolute inset-0 bg-gradient-to-b from-[#f7f3ee]/35 via-[#f7f3ee]/55 to-[#f7f3ee]" />
       </div>
 
-      <div className="relative mx-auto flex min-h-screen max-w-6xl items-center px-4 pb-10 pt-16 sm:px-8 lg:px-12">
+      <div className="relative mx-auto flex min-h-screen max-w-6xl items-center px-3 pb-8 pt-14 sm:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="relative z-10 mx-auto w-full max-w-3xl text-center"
         >
-          <div className="mb-5 flex justify-center">
-            <div className="overflow-hidden rounded-[30px] border border-[#d9c9b9] bg-white/75 p-1.75 shadow-[0_22px_44px_rgba(86,67,54,0.12)] backdrop-blur-sm">
+          <div className="mb-4 flex justify-center">
+            <div className="overflow-hidden rounded-[32px] border border-[#d9c9b9] bg-white/80 p-2 shadow-[0_24px_48px_rgba(86,67,54,0.12)] backdrop-blur-sm sm:p-2.5">
               <img
                 src={heroImage}
                 alt={heroAlt}
-                className="h-32 w-32 rounded-[24px] object-cover sm:h-40 sm:w-40"
-                width="160"
-                height="160"
+                className="h-44 w-44 rounded-[28px] object-cover sm:h-52 sm:w-52 lg:h-64 lg:w-64"
+                width="256"
+                height="256"
               />
             </div>
           </div>
 
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9c9b9] bg-white/60 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5c4b3b] backdrop-blur-sm sm:mb-6 sm:px-4 sm:text-[11px]">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d9c9b9] bg-white/60 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5c4b3b] backdrop-blur-sm sm:mb-5 sm:px-4 sm:text-[11px]">
             <CalendarHeart size={14} className="sm:h-4 sm:w-4" />
             {activeEvent.title}
           </div>
