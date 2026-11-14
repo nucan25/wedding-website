@@ -1,23 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { CalendarHeart, ArrowDown, Music2, VolumeX } from 'lucide-react';
 import { motion } from 'framer-motion';
-import weddingConfig from '../config';
+import { getWeddingConfig } from '../config';
 
 function Hero({ activeEvent, activeEventId, onSelectEvent }) {
-  const [partnerOne, partnerTwo] = weddingConfig.couple;
+  const config = getWeddingConfig();
+  const [partnerOne, partnerTwo] = config.couple;
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  const heroImage = activeEvent?.heroImage || weddingConfig.heroImage;
+  const heroImage = activeEvent?.heroImage || config.heroImage;
   const heroAlt = activeEvent?.coverAlt || 'Düğün kapak görseli';
-  const activeMusic = weddingConfig.musicByEvent?.[activeEventId] || weddingConfig.musicByEvent?.['event-wedding'];
-  const audioSource = activeMusic?.url || weddingConfig.musicUrl || '';
+  const activeMusic = config.musicByEvent?.[activeEventId] || config.musicByEvent?.['event-wedding'];
+  const audioSource = activeMusic?.url || config.musicUrl || '';
   const hasMusic = Boolean(audioSource);
 
   const eventButtons = [
-    { id: 'event-wedding', label: weddingConfig.events['event-wedding']?.buttonLabel || 'Düğün' },
-    { id: 'event-kina', label: weddingConfig.events['event-kina']?.buttonLabel || 'Kına' },
-    { id: 'event-gelin-cikarma', label: weddingConfig.events['event-gelin-cikarma']?.buttonLabel || 'Gelin Çıkarma' },
+    { id: 'event-wedding', label: config.events['event-wedding']?.buttonLabel || 'Düğün' },
+    { id: 'event-kina', label: config.events['event-kina']?.buttonLabel || 'Kına' },
+    { id: 'event-gelin-cikarma', label: config.events['event-gelin-cikarma']?.buttonLabel || 'Gelin Çıkarma' },
   ];
 
   useEffect(() => {

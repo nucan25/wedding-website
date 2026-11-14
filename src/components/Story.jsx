@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
-import weddingConfig from '../config';
+import { getWeddingConfig } from '../config';
 
-function Story({ activeEventId = weddingConfig.defaultEventId }) {
-  const currentStory = weddingConfig.storyByEvent?.[activeEventId] ?? {
-    intro: weddingConfig.storyIntro,
-    items: weddingConfig.story,
+function Story({ activeEventId }) {
+  const config = getWeddingConfig();
+  const currentEventId = activeEventId ?? config.defaultEventId;
+  const currentStory = config.storyByEvent?.[currentEventId] ?? {
+    intro: config.storyIntro,
+    items: config.story,
   };
 
   return (
@@ -30,7 +32,7 @@ function Story({ activeEventId = weddingConfig.defaultEventId }) {
         <div className="space-y-6">
           {currentStory.items.map((item, index) => (
             <motion.article
-              key={`${activeEventId}-${item.year}-${item.title}-${index}`}
+              key={`${currentEventId}-${item.year}-${item.title}-${index}`}
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}

@@ -30,7 +30,54 @@ const buildEvent = ({
   buttonLabel,
 });
 
-export const weddingConfig = {
+export function readAdminOverrides() {
+  if (typeof window === 'undefined') return {};
+
+  try {
+    const raw = window.localStorage.getItem(ADMIN_STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {
+    // Safari/private mode may block localStorage. Fall back to sessionStorage below.
+  }
+
+  try {
+    const raw = window.sessionStorage.getItem(ADMIN_STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {
+    // Some browsers may also block sessionStorage in private mode.
+  }
+
+  if (typeof window !== 'undefined' && window.__weddingAdminCache) {
+    try {
+      return JSON.parse(window.__weddingAdminCache);
+    } catch {
+      return {};
+    }
+  }
+
+  return {};
+}
+
+export function saveAdminOverrides(payload) {
+  if (typeof window === 'undefined') return false;
+
+  const value = JSON.stringify(payload);
+
+  try {
+    window.localStorage.setItem(ADMIN_STORAGE_KEY, value);
+    return true;
+  } catch {
+    try {
+      window.sessionStorage.setItem(ADMIN_STORAGE_KEY, value);
+      return true;
+    } catch {
+      window.__weddingAdminCache = value;
+      return true;
+    }
+  }
+}
+
+const defaultConfig = {
   couple: ['Sümeyye', 'Nurullah'],
   eventName: 'Düğün Davetiyesi',
   date: '2027-01-30T18:00:00+03:00',
@@ -243,5 +290,61 @@ export const weddingConfig = {
   imageGallery: [story1, story2, story3],
   heroImage,
 };
+
+function mergeStoryByEvent(baseStoryByEvent, overrides = {}) {
+  const merged = { ...baseStoryByEvent };
+
+  Object.entries(overrides).forEach(([eventId, eventStory]) => {
+    if (!eventStory) return;
+
+    const baseEventStory = merged[eventId] ?? {};
+    merged[eventId] = {
+      ...baseEventStory,
+      ...eventStory,
+      items: Array.isArray(eventStory.items)
+        ? eventStory.items.map((item, index) => ({
+            ...(baseEventStory.items?.[index] ?? {}),
+            ...item,
+          }))
+        : Array.isArray(baseEventStory.items)
+          ? baseEventStory.items
+          : [],
+    };
+  });
+
+  return merged;
+}
+
+export function getWeddingConfig() {
+  const adminOverrides = readAdminOverrides();
+
+  return {
+    ...defaultConfig,
+    ...adminOverrides,
+    musicByEvent: {
+      ...defaultConfig.musicByEvent,
+      ...(adminOverrides.musicByEvent ?? {}),
+    },
+    events: Object.fromEntries(
+      Object.entries(defaultConfig.events).map(([eventId, eventValue]) => [
+        eventId,
+        {
+          ...eventValue,
+          ...(adminOverrides.events?.[eventId] ?? {}),
+          heroImage: adminOverrides.events?.[eventId]?.heroImage || eventValue.heroImage,
+        },
+      ]),
+    ),
+    storyByEvent: mergeStoryByEvent(defaultConfig.storyByEvent, adminOverrides.storyByEvent),
+    imageGallery: Array.isArray(adminOverrides.imageGallery)
+      ? adminOverrides.imageGallery
+      : defaultConfig.imageGallery,
+    heroImage: adminOverrides.heroImage || defaultConfig.heroImage,
+  };
+}
+
+export const weddingConfig = getWeddingConfig();
+export const ADMIN_PASSWORD = 'admin';
+export const ADMIN_STORAGE_KEY = 'wedding-admin-config-v1';
 
 export default weddingConfig;

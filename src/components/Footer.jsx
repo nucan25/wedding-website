@@ -1,15 +1,16 @@
-import weddingConfig from '../config';
+import { getWeddingConfig } from '../config';
 
 function Footer() {
+  const config = getWeddingConfig();
   return (
     <footer className="border-t border-[#eadbc8] bg-[#f7f1eb]">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-5 py-8 text-center text-[#4f4642] sm:flex-row sm:text-left">
         <div>
           <p className="font-display text-3xl text-[#2d2420]">
-            {weddingConfig.couple[0]} <span className="mx-2 text-[#7a9280]">&</span> {weddingConfig.couple[1]}
+            {config.couple[0]} <span className="mx-2 text-[#7a9280]">&</span> {config.couple[1]}
           </p>
           <p className="mt-1 text-sm tracking-[0.18em] uppercase text-[#695f5b]">
-            {new Date(weddingConfig.date).toLocaleDateString('tr-TR', {
+            {new Date(config.date).toLocaleDateString('tr-TR', {
               day: 'numeric',
               month: 'long',
               year: 'numeric',

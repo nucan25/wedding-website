@@ -1,4 +1,4 @@
-import weddingConfig from './config';
+import { getWeddingConfig } from './config';
 
 function getDirectionsUrl(venueName, venueAddress, fallbackUrl) {
   if (fallbackUrl && !fallbackUrl.startsWith('TODO')) {
@@ -19,8 +19,8 @@ function getGoogleMapsEmbedUrl(venueName, venueAddress, fallbackUrl) {
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
 }
 
-export function getProgramEvents() {
-  const events = weddingConfig.events ?? {};
+export function getProgramEvents(config = getWeddingConfig()) {
+  const events = config.events ?? {};
 
   return Object.values(events).map((event) => ({
     id: event.id,

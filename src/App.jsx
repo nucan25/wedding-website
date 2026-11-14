@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Hero from './components/Hero';
 import Countdown from './components/Countdown';
 import Story from './components/Story';
@@ -7,16 +7,41 @@ import Venue from './components/Venue';
 import PhotoShare from './components/PhotoShare';
 import Faq from './components/Faq';
 import Footer from './components/Footer';
-import weddingConfig from './config';
+import { getWeddingConfig } from './config';
 import { getProgramEvents } from './eventData';
+import AdminPage from './AdminPage';
 
 function App() {
-  const programEvents = useMemo(() => getProgramEvents(), []);
-  const [activeEventId, setActiveEventId] = useState(weddingConfig.defaultEventId);
+  const [configVersion, setConfigVersion] = useState(0);
+
+  useEffect(() => {
+    const handleConfigUpdate = () => setConfigVersion((current) => current + 1);
+    window.addEventListener('wedding-config-updated', handleConfigUpdate);
+    return () => {
+      window.removeEventListener('wedding-config-updated', handleConfigUpdate);
+    };
+  }, []);
+
+  const config = useMemo(() => getWeddingConfig(), [configVersion]);
+  const isAdminRoute = typeof window !== 'undefined' && window.location.pathname === '/admin';
+
+  if (isAdminRoute) {
+    return <AdminPage />;
+  }
+
+  const programEvents = useMemo(() => getProgramEvents(config), [config]);
+  const [activeEventId, setActiveEventId] = useState(config.defaultEventId);
+
+  useEffect(() => {
+    setActiveEventId((current) => {
+      if (config.events[current]) return current;
+      return config.defaultEventId;
+    });
+  }, [config]);
 
   const activeEvent =
     programEvents.find((event) => event.id === activeEventId) ??
-    programEvents.find((event) => event.id === weddingConfig.defaultEventId) ??
+    programEvents.find((event) => event.id === config.defaultEventId) ??
     programEvents[0];
 
   return (

@@ -1,7 +1,8 @@
 import { Camera, Sparkles, Smartphone } from 'lucide-react';
-import weddingConfig from '../config';
+import { getWeddingConfig } from '../config';
 
 function PhotoShare() {
+  const config = getWeddingConfig();
   return (
     <section id="photo-share" className="section-shell">
       <div className="mx-auto max-w-6xl rounded-[2.3rem] border border-[#ebdcca] bg-[#fefaf6] p-6 shadow-[0_18px_40px_rgba(86,74,62,0.05)] sm:p-10">
@@ -15,7 +16,7 @@ function PhotoShare() {
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
-                href={weddingConfig.driveFolderUrl}
+                href={config.driveFolderUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2f2a27] px-6 py-3 text-sm font-medium text-[#f8f3ee] transition hover:-translate-y-0.5 hover:bg-[#1c1817] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#b8cfc0]"
@@ -24,7 +25,7 @@ function PhotoShare() {
                 Google Drive’da yükle
               </a>
               <a
-                href={weddingConfig.driveFolderUrl}
+                href={config.driveFolderUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cbb7a3] bg-white px-6 py-3 text-sm font-medium text-[#352d29] transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#d7e0d6]"
