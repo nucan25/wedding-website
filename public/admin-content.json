@@ -53,7 +53,7 @@
       "directionsUrl": "https://www.google.com/maps/dir/Armada+D%C3%BC%C4%9F%C3%BCn+Ve+Kongre+Salonu,+Harput+Mahallesi,+5.+Sk.+No:17,+25070+Paland%C3%B6ken%2FErzurum/Armada+D%C3%BC%C4%9F%C3%BCn+Ve+Kongre+Salonu,+Harput+Mahallesi,+5.+Sk.+No:17,+25070+Paland%C3%B6ken%2FErzurum/@39.9373297,41.3578315,11.7z/data=!4m13!4m12!1m5!1m1!1s0x406e5ef3a39d4aff:0x32d2fe29f04edc56!2m2!1d41.2448973!2d39.8877113!1m5!1m1!1s0x406e5ef3a39d4aff:0x32d2fe29f04edc56!2m2!1d41.2448973!2d39.8877113?entry=ttu&g_ep=EgoyMDI2MTEwOS4wIKXMDSoASAFQAw%3D%3D",
       "googleMapsEmbedUrl": "https://www.google.com/maps?q=Armada%20D%C3%BC%C4%9F%C3%BCn%20Ve%20Kongre%20Salonu%2C%20Harput%20Mahallesi%2C%205.%20Sk.%20No%3A17%2C%2025070%20Paland%C3%B6ken%2FErzurum&output=embed",
       "description": "TODO: Düğün gününün akışı, kucaklaşma anları ve özel anlara dair kısa açıklama.",
-      "heroImage": "/src/assets/images/ChatGPT%20Image%20Sep%209,%202026,%2008_49_21%20PM.png",
+      "heroImage": "/uploads/2a4a8912.jpg",
       "coverAlt": "Düğün kapak görseli",
       "buttonLabel": "Düğün"
     },
@@ -87,7 +87,7 @@
   "storyIntro": "TODO: Hikâyemiz kısa bir metin. Bu alanı özel anılarınızla doldurun.",
   "storyByEvent": {
     "event-wedding": {
-      "intro": "Karımı çokkkk seviyorummmm.",
+      "intro": "burada bazı değişiklikler yaptım",
       "items": [
         {
           "year": "2018",
