@@ -33,6 +33,16 @@ const buildEvent = ({
 export function readAdminOverrides() {
   if (typeof window === 'undefined') return {};
 
+  if (window.__weddingProjectConfig) {
+    try {
+      return typeof window.__weddingProjectConfig === 'string'
+        ? JSON.parse(window.__weddingProjectConfig)
+        : window.__weddingProjectConfig;
+    } catch {
+      return {};
+    }
+  }
+
   try {
     const raw = window.localStorage.getItem(ADMIN_STORAGE_KEY);
     if (raw) return JSON.parse(raw);
@@ -62,6 +72,7 @@ export function saveAdminOverrides(payload) {
   if (typeof window === 'undefined') return false;
 
   const value = JSON.stringify(payload);
+  window.__weddingProjectConfig = payload;
 
   try {
     window.localStorage.setItem(ADMIN_STORAGE_KEY, value);

@@ -17,6 +17,23 @@ function App() {
   useEffect(() => {
     const handleConfigUpdate = () => setConfigVersion((current) => current + 1);
     window.addEventListener('wedding-config-updated', handleConfigUpdate);
+
+    const loadProjectConfig = async () => {
+      try {
+        const response = await fetch('/admin-content.json', { cache: 'no-store' });
+        if (!response.ok) return;
+
+        const data = await response.json();
+        if (data && Object.keys(data).length > 0) {
+          window.__weddingProjectConfig = data;
+          setConfigVersion((current) => current + 1);
+        }
+      } catch {
+        // Ignore missing or invalid project config file. Keep default config.
+      }
+    };
+
+    loadProjectConfig();
     return () => {
       window.removeEventListener('wedding-config-updated', handleConfigUpdate);
     };

@@ -138,6 +138,29 @@ export async function persistAssetToProjectDirectory(file, directoryName = 'uplo
   return `/${directoryName}/${finalFileName}`;
 }
 
+export async function persistProjectConfigToDirectory(payload, fileName = 'admin-content.json') {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  if (!('showDirectoryPicker' in window)) {
+    throw new Error('Directory picker is not supported in this browser.');
+  }
+
+  const root = window.__weddingProjectRoot ?? (await window.showDirectoryPicker({ mode: 'readwrite' }));
+  window.__weddingProjectRoot = root;
+
+  const publicDirectory = await root.getDirectoryHandle('public', { create: true });
+  const fileHandle = await publicDirectory.getFileHandle(fileName, { create: true });
+  const writable = await fileHandle.createWritable();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+
+  await writable.write(blob);
+  await writable.close();
+
+  return `/${fileName}`;
+}
+
 function dataUrlToBlob(dataUrl) {
   const [header, base64Data] = dataUrl.split(',');
   const mimeType = header.match(/^data:(.*?);base64$/)?.[1] || 'image/png';

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ADMIN_PASSWORD,
   ADMIN_STORAGE_KEY,
@@ -7,10 +7,8 @@ import {
   saveAdminOverrides,
 } from './config';
 import {
-  buildProjectAssetManifest,
-  downloadProjectAssetManifest,
-  exportProjectAssetsToSelectedDirectory,
   persistAssetToProjectDirectory,
+  persistProjectConfigToDirectory,
 } from './adminAssetExport';
 
 const getDefaultDraft = () => {
@@ -119,6 +117,25 @@ function AdminPage() {
   const [draft, setDraft] = useState(readSavedDraft());
   const [pendingUploads, setPendingUploads] = useState({});
   const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    const loadProjectDraft = async () => {
+      try {
+        const response = await fetch('/admin-content.json', { cache: 'no-store' });
+        if (!response.ok) return;
+
+        const data = await response.json();
+        if (!data || Object.keys(data).length === 0) return;
+
+        window.__weddingProjectConfig = data;
+        setDraft(readSavedDraft());
+      } catch {
+        // Ignore missing project config; fallback is the current stored draft.
+      }
+    };
+
+    loadProjectDraft();
+  }, []);
 
   const eventList = useMemo(() => {
     const events = Object.entries(getWeddingConfig().events);
@@ -345,6 +362,13 @@ function AdminPage() {
     if (typeof window === 'undefined') return;
 
     const payload = await buildUploadPayload();
+
+    try {
+      await persistProjectConfigToDirectory(payload, 'admin-content.json');
+      window.__weddingProjectConfig = payload;
+    } catch {
+      // No directory picker support; keep browser-local fallback for development.
+    }
 
     const saved = saveAdminOverrides(payload);
 
