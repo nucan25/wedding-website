@@ -14,7 +14,7 @@
     },
     "event-kina": {
       "title": "Kına Teması",
-      "url": "/audio/kina.mp3"
+      "url": "/audio/sezen-aksu-cocuklar-gibi.mp3"
     },
     "event-gelin-cikarma": {
       "title": "Gelin Çıkarma Teması",
@@ -23,22 +23,22 @@
   },
   "program": [
     {
-      "time": "16:00",
+      "time": "18:00",
       "title": "Karşılama",
       "description": "TODO: Misafirlerimize sıcak bir karşılama ve kokteyl."
     },
     {
-      "time": "17:00",
+      "time": "19:00",
       "title": "Tören",
       "description": "TODO: Nikâh ve söz töreni detayları."
     },
     {
-      "time": "18:30",
+      "time": "20:00",
       "title": "Yemek",
       "description": "TODO: Akşam yemeği ve kutlamanın başlangıcı."
     },
     {
-      "time": "20:00",
+      "time": "21:00",
       "title": "Dans",
       "description": "TODO: Eğlence, dans ve sonradan başlayan coşku."
     }
@@ -87,76 +87,76 @@
   "storyIntro": "TODO: Hikâyemiz kısa bir metin. Bu alanı özel anılarınızla doldurun.",
   "storyByEvent": {
     "event-wedding": {
-      "intro": "burada bazı değişiklikler yaptım",
+      "intro": "Hayatımızın en özel ve anlamlı gününü sevdiklerimizle paylaşmak için heyecanla gün sayıyoruz. Bu mutluluğa ortak olmanız bizim için en büyük hediyedir.",
       "items": [
         {
-          "year": "2018",
+          "year": "",
           "title": "İlk Tanışma",
           "text": "Karımı çokkkk seviyorummmm.",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F2E9E1'/%3e%3crect%20width='800'%20height='600'%20fill='url(%23paint0_linear_1_2)'/%3e%3ccircle%20cx='208'%20cy='160'%20r='140'%20fill='%23E5D1C0'%20fill-opacity='0.7'/%3e%3ccircle%20cx='598'%20cy='430'%20r='180'%20fill='%23C8D7C4'%20fill-opacity='0.7'/%3e%3cpath%20d='M120%20440C190%20310%20322%20260%20424%20280C507%20295%20560%20339%20611%20396C644%20432%20679%20454%20724%20468V600H74V512C90%20489%20102%20466%20120%20440Z'%20fill='%23D9C3B1'%20fill-opacity='0.8'/%3e%3cpath%20d='M215%20246C291%20203%20376%20196%20448%20227C507%20252%20561%20304%20566%20368C572%20436%20523%20500%20452%20525C374%20553%20271%20546%20202%20511C141%20479%20104%20418%20111%20356C117%20306%20158%20282%20215%20246Z'%20fill='%23F7F3EE'/%3e%3crect%20x='499'%20y='150'%20width='155'%20height='120'%20rx='18'%20fill='%23EFE5DC'/%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_1_2'%20x1='400'%20y1='0'%20x2='400'%20y2='600'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%23F8F3EE'/%3e%3cstop%20offset='1'%20stop-color='%23EADCCB'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"
         },
         {
-          "year": "2021",
-          "title": "İlk Yolculuk",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "year": "",
+          "title": "",
+          "text": "",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F3EDE4'/%3e%3ccircle%20cx='197'%20cy='168'%20r='100'%20fill='%23EAD5C2'%20fill-opacity='0.85'/%3e%3ccircle%20cx='630'%20cy='420'%20r='180'%20fill='%23C4D4C0'%20fill-opacity='0.8'/%3e%3cpath%20d='M54%20500C113%20470%20144%20430%20164%20387C181%20352%20189%20317%20208%20295C252%20247%20309%20219%20373%20223C445%20228%20520%20273%20565%20336C600%20384%20622%20443%20621%20505V600H54V500Z'%20fill='%23D9C3B1'%20fill-opacity='0.75'/%3e%3cpath%20d='M186%20250C215%20224%20262%20206%20309%20204C348%20202%20381%20214%20408%20233C434%20252%20449%20281%20465%20313C489%20360%20524%20406%20563%20426C517%20459%20470%20479%20417%20491C340%20507%20264%20493%20205%20459C150%20427%20115%20378%20108%20329C103%20296%20130%20274%20186%20250Z'%20fill='%23F9F5F1'/%3e%3cpath%20d='M215%20344C262%20321%20311%20309%20350%20308C399%20307%20447%20321%20486%20349'%20stroke='%23C8D6C5'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
         },
         {
-          "year": "2024",
-          "title": "Teklif",
-          "text": "Karımı çokkkk seviyorummmm.",
-          "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F5EFE9'/%3e%3ccircle%20cx='650'%20cy='155'%20r='130'%20fill='%23D7C9B8'%20fill-opacity='0.7'/%3e%3ccircle%20cx='204'%20cy='428'%20r='176'%20fill='%23CFDCCB'%20fill-opacity='0.7'/%3e%3cpath%20d='M140%20450C183%20390%20234%20342%20286%20310C331%20282%20388%20258%20442%20268C488%20275%20541%20302%20577%20343C608%20379%20628%20425%20629%20474V600H135V476C136%20468%20138%20458%20140%20450Z'%20fill='%23E9D8C6'%20fill-opacity='0.8'/%3e%3ccircle%20cx='396'%20cy='266'%20r='136'%20fill='%23F8F4F0'/%3e%3ccircle%20cx='396'%20cy='266'%20r='91'%20fill='%23E5D0C0'/%3e%3cpath%20d='M325%20266H466'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3cpath%20d='M396%20194V337'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
+          "year": "31.10.2026",
+          "title": "Evlilik Teklifi",
+          "text": "Bir ömür boyu el ele yürümek için sorulan o en heyecanlı soru ve kalpten gelen kocaman bir 'Evet!'. Hayallerimizin gerçeğe dönüştüğü an.",
+          "image": "/uploads/2a4a8912.jpg"
         },
         {
-          "year": "2027",
-          "title": "Düğün Günü",
-          "text": "Karımı çokkkk seviyorummmm.",
-          "image": "/src/assets/images/IMG_8484.JPG"
+          "year": "18.01.2026",
+          "title": "Nişanımız",
+          "text": "Sevdiklerimizle bir arada, kahkahalarla ve heyecanla kutladığımız en tatlı başlangıç. Düğünümüze giden yolda en güzel prova!",
+          "image": "/uploads/img-8484.jpg"
         }
       ]
     },
     "event-kina": {
-      "intro": "Karımı çokkkk seviyorummmm.",
+      "intro": "Geleneklerimizi sevgi ve neşeyle yaşatacağımız bu anlamlı gecede, mutluluğumuzu paylaşmanız dileğiyle...",
       "items": [
         {
           "year": "2027",
           "title": "Kına Öncesi",
-          "text": "Karımı çokkkk seviyorummmm.",
-          "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F2E9E1'/%3e%3crect%20width='800'%20height='600'%20fill='url(%23paint0_linear_1_2)'/%3e%3ccircle%20cx='208'%20cy='160'%20r='140'%20fill='%23E5D1C0'%20fill-opacity='0.7'/%3e%3ccircle%20cx='598'%20cy='430'%20r='180'%20fill='%23C8D7C4'%20fill-opacity='0.7'/%3e%3cpath%20d='M120%20440C190%20310%20322%20260%20424%20280C507%20295%20560%20339%20611%20396C644%20432%20679%20454%20724%20468V600H74V512C90%20489%20102%20466%20120%20440Z'%20fill='%23D9C3B1'%20fill-opacity='0.8'/%3e%3cpath%20d='M215%20246C291%20203%20376%20196%20448%20227C507%20252%20561%20304%20566%20368C572%20436%20523%20500%20452%20525C374%20553%20271%20546%20202%20511C141%20479%20104%20418%20111%20356C117%20306%20158%20282%20215%20246Z'%20fill='%23F7F3EE'/%3e%3crect%20x='499'%20y='150'%20width='155'%20height='120'%20rx='18'%20fill='%23EFE5DC'/%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_1_2'%20x1='400'%20y1='0'%20x2='400'%20y2='600'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%23F8F3EE'/%3e%3cstop%20offset='1'%20stop-color='%23EADCCB'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"
+          "text": "Müzikler eşliğinde en sevdiklerimizle bir araya geliyor, gecenin enerjisini ilk andan itibaren yükseltiyoruz",
+          "image": "/uploads/gemini-generated-image-zgw009zgw009zgw0.jpeg"
         },
         {
           "year": "2027",
           "title": "Aile Sıcaklığı",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "text": "Geleneksel türküler ve duygu dolu anlar eşliğinde ellerimize kınalar yakılıyor; hem hüzün hem mutluluk bir arada yaşanıyor.",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F3EDE4'/%3e%3ccircle%20cx='197'%20cy='168'%20r='100'%20fill='%23EAD5C2'%20fill-opacity='0.85'/%3e%3ccircle%20cx='630'%20cy='420'%20r='180'%20fill='%23C4D4C0'%20fill-opacity='0.8'/%3e%3cpath%20d='M54%20500C113%20470%20144%20430%20164%20387C181%20352%20189%20317%20208%20295C252%20247%20309%20219%20373%20223C445%20228%20520%20273%20565%20336C600%20384%20622%20443%20621%20505V600H54V500Z'%20fill='%23D9C3B1'%20fill-opacity='0.75'/%3e%3cpath%20d='M186%20250C215%20224%20262%20206%20309%20204C348%20202%20381%20214%20408%20233C434%20252%20449%20281%20465%20313C489%20360%20524%20406%20563%20426C517%20459%20470%20479%20417%20491C340%20507%20264%20493%20205%20459C150%20427%20115%20378%20108%20329C103%20296%20130%20274%20186%20250Z'%20fill='%23F9F5F1'/%3e%3cpath%20d='M215%20344C262%20321%20311%20309%20350%20308C399%20307%20447%20321%20486%20349'%20stroke='%23C8D6C5'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
         },
         {
           "year": "2027",
-          "title": "Kına Anı",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "title": "Kına Sonrası",
+          "text": "Kına merasiminin ardından ritmi hiç düşürmüyor, en sevdiğimiz şarkılarla geceyi unutulmaz bir partiye dönüştürüyoruz.",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F5EFE9'/%3e%3ccircle%20cx='650'%20cy='155'%20r='130'%20fill='%23D7C9B8'%20fill-opacity='0.7'/%3e%3ccircle%20cx='204'%20cy='428'%20r='176'%20fill='%23CFDCCB'%20fill-opacity='0.7'/%3e%3cpath%20d='M140%20450C183%20390%20234%20342%20286%20310C331%20282%20388%20258%20442%20268C488%20275%20541%20302%20577%20343C608%20379%20628%20425%20629%20474V600H135V476C136%20468%20138%20458%20140%20450Z'%20fill='%23E9D8C6'%20fill-opacity='0.8'/%3e%3ccircle%20cx='396'%20cy='266'%20r='136'%20fill='%23F8F4F0'/%3e%3ccircle%20cx='396'%20cy='266'%20r='91'%20fill='%23E5D0C0'/%3e%3cpath%20d='M325%20266H466'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3cpath%20d='M396%20194V337'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
         }
       ]
     },
     "event-gelin-cikarma": {
-      "intro": "Karımı çokkkk seviyorummmm.",
+      "intro": "Davullar zurnalar eşliğinde başlayan heyecanımız; baba ocağından alınan dualar ve coşkulu konvoyumuzla en mutlu günümüze doğru ilerliyor. Bu güzel yolculuğa siz de eşlik edin!",
       "items": [
         {
           "year": "2027",
-          "title": "Hazırlık",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "title": "Erkek Evinde Toplanış",
+          "text": "Büyük günün heyecanı sabahın ilk ışıklarıyla başlıyor! Tüm dostlarımız ve ailemizle erkek evinde bir araya geliyor, davul zurna eşliğinde yola çıkmaya hazırlanıyoruz.",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F3EDE4'/%3e%3ccircle%20cx='197'%20cy='168'%20r='100'%20fill='%23EAD5C2'%20fill-opacity='0.85'/%3e%3ccircle%20cx='630'%20cy='420'%20r='180'%20fill='%23C4D4C0'%20fill-opacity='0.8'/%3e%3cpath%20d='M54%20500C113%20470%20144%20430%20164%20387C181%20352%20189%20317%20208%20295C252%20247%20309%20219%20373%20223C445%20228%20520%20273%20565%20336C600%20384%20622%20443%20621%20505V600H54V500Z'%20fill='%23D9C3B1'%20fill-opacity='0.75'/%3e%3cpath%20d='M186%20250C215%20224%20262%20206%20309%20204C348%20202%20381%20214%20408%20233C434%20252%20449%20281%20465%20313C489%20360%20524%20406%20563%20426C517%20459%20470%20479%20417%20491C340%20507%20264%20493%20205%20459C150%20427%20115%20378%20108%20329C103%20296%20130%20274%20186%20250Z'%20fill='%23F9F5F1'/%3e%3cpath%20d='M215%20344C262%20321%20311%20309%20350%20308C399%20307%20447%20321%20486%20349'%20stroke='%23C8D6C5'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
         },
         {
           "year": "2027",
-          "title": "Yolculuk",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "title": "Kız Evine Gidiş & Konvoy",
+          "text": "Kornalar ve alkışlar eşliğinde, mutluluğa doğru yola çıkıyoruz! Coşkulu konvoyumuzla kız evine doğru heyecan dolu yolculuğumuz başlıyor.",
           "image": "data:image/svg+xml,%3csvg%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='800'%20height='600'%20fill='%23F5EFE9'/%3e%3ccircle%20cx='650'%20cy='155'%20r='130'%20fill='%23D7C9B8'%20fill-opacity='0.7'/%3e%3ccircle%20cx='204'%20cy='428'%20r='176'%20fill='%23CFDCCB'%20fill-opacity='0.7'/%3e%3cpath%20d='M140%20450C183%20390%20234%20342%20286%20310C331%20282%20388%20258%20442%20268C488%20275%20541%20302%20577%20343C608%20379%20628%20425%20629%20474V600H135V476C136%20468%20138%20458%20140%20450Z'%20fill='%23E9D8C6'%20fill-opacity='0.8'/%3e%3ccircle%20cx='396'%20cy='266'%20r='136'%20fill='%23F8F4F0'/%3e%3ccircle%20cx='396'%20cy='266'%20r='91'%20fill='%23E5D0C0'/%3e%3cpath%20d='M325%20266H466'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3cpath%20d='M396%20194V337'%20stroke='%23F8F4F0'%20stroke-width='18'%20stroke-linecap='round'/%3e%3c/svg%3e"
         },
         {
           "year": "2027",
-          "title": "Ayrılık ve Başlangıç",
-          "text": "Karımı çokkkk seviyorummmm.",
+          "title": "Düğün Salonuna Geçiş",
+          "text": "Artık el eleyiz! Konvoyumuzla birlikte bu masalsı günü ölümsüzleştireceğimiz ve doyasıya eğleneceğimiz düğün salonuna doğru ilerliyoruz.",
           "image": "/src/assets/images/IMG_8484.JPG"
         }
       ]

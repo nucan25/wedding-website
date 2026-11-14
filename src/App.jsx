@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import Hero from './components/Hero';
-import Countdown from './components/Countdown';
-import Story from './components/Story';
-import Program from './components/Program';
-import Venue from './components/Venue';
-import PhotoShare from './components/PhotoShare';
-import Faq from './components/Faq';
-import Footer from './components/Footer';
-import { getWeddingConfig } from './config';
-import { getProgramEvents } from './eventData';
-import AdminPage from './AdminPage';
+import Hero from './components/Hero.jsx';
+import Countdown from './components/Countdown.jsx';
+import Story from './components/Story.jsx';
+import Program from './components/Program.jsx';
+import Venue from './components/Venue.jsx';
+import PhotoShare from './components/PhotoShare.jsx';
+import Faq from './components/Faq.jsx';
+import Footer from './components/Footer.jsx';
+import { getWeddingConfig } from './config.js';
+import { getProgramEvents } from './eventData.js';
+import AdminPage from './AdminPage.jsx';
 
 function App() {
   const [configVersion, setConfigVersion] = useState(0);

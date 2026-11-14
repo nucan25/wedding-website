@@ -41,6 +41,14 @@ function ensureUniqueFileName(baseName, extension, usedNames) {
   return nextName;
 }
 
+export function normalizeImageGallery(images = []) {
+  if (!Array.isArray(images)) {
+    return [];
+  }
+
+  return images.filter((image) => typeof image === 'string' && image.trim().length > 0);
+}
+
 export function collectProjectAssetEntries(config = {}) {
   const entries = [];
   const seen = new Set();

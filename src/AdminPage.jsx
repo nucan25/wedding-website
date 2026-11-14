@@ -5,11 +5,12 @@ import {
   getWeddingConfig,
   readAdminOverrides,
   saveAdminOverrides,
-} from './config';
+} from './config.js';
 import {
+  normalizeImageGallery,
   persistAssetToProjectDirectory,
   persistProjectConfigToDirectory,
-} from './adminAssetExport';
+} from './adminAssetExport.js';
 
 const getDefaultDraft = () => {
   const config = getWeddingConfig();
@@ -73,7 +74,7 @@ function readSavedDraft() {
       ),
       storyIntro: saved.storyIntro || base.storyIntro,
       storyByEvent: saved.storyByEvent || base.storyByEvent,
-      imageGallery: saved.imageGallery || base.imageGallery,
+      imageGallery: normalizeImageGallery(saved.imageGallery ?? base.imageGallery),
       faqs: saved.faqs || base.faqs,
     };
   } catch {
@@ -247,8 +248,14 @@ function AdminPage() {
 
     const previewUrl = URL.createObjectURL(file);
     setDraft((current) => {
-      const nextGallery = [...(current.imageGallery ?? [])];
-      nextGallery[index] = previewUrl;
+      const nextGallery = normalizeImageGallery(current.imageGallery ?? []);
+
+      if (Number.isInteger(index) && index >= 0 && index < nextGallery.length) {
+        nextGallery[index] = previewUrl;
+      } else {
+        nextGallery.push(previewUrl);
+      }
+
       return { ...current, imageGallery: nextGallery };
     });
     registerPendingUpload(`gallery:${index}`, file);
@@ -326,8 +333,15 @@ function AdminPage() {
           }
         } else if (key.startsWith('gallery:')) {
           const index = Number(key.split(':')[1]);
-          nextPayload.imageGallery = [...(nextPayload.imageGallery ?? [])];
-          nextPayload.imageGallery[index] = path;
+          const gallery = normalizeImageGallery(nextPayload.imageGallery ?? []);
+
+          if (Number.isInteger(index) && index >= 0 && index < gallery.length) {
+            gallery[index] = path;
+          } else {
+            gallery.push(path);
+          }
+
+          nextPayload.imageGallery = gallery;
         } else if (key.startsWith('audio:')) {
           const eventId = key.split(':')[1];
           nextPayload.musicByEvent = {

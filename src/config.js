@@ -1,8 +1,9 @@
-import heroImage from './assets/images/ChatGPT Image Sep 9, 2026, 08_49_21 PM.png';
+import { normalizeImageGallery } from './adminAssetExport.js';
+import heroImage from './assets/images/hero-1.svg';
 import story1 from './assets/images/story-1.svg';
 import story2 from './assets/images/story-2.svg';
 import story3 from './assets/images/story-3.svg';
-import story4 from './assets/images/IMG_8484.JPG';
+import story4 from './assets/images/story-3.svg';
 
 const buildEvent = ({
   id,
@@ -347,9 +348,11 @@ export function getWeddingConfig() {
       ]),
     ),
     storyByEvent: mergeStoryByEvent(defaultConfig.storyByEvent, adminOverrides.storyByEvent),
-    imageGallery: Array.isArray(adminOverrides.imageGallery)
-      ? adminOverrides.imageGallery
-      : defaultConfig.imageGallery,
+    imageGallery: normalizeImageGallery(
+      Array.isArray(adminOverrides.imageGallery)
+        ? adminOverrides.imageGallery
+        : defaultConfig.imageGallery,
+    ),
     heroImage: adminOverrides.heroImage || defaultConfig.heroImage,
   };
 }
