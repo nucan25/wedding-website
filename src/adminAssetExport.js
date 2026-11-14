@@ -95,6 +95,49 @@ export function buildProjectAssetManifest(config = {}) {
   };
 }
 
+export function createProjectAssetFileName(fileName, fallback = 'asset') {
+  const safeBase = (fileName || fallback)
+    .trim()
+    .replace(/\.[^/.]+$/, '')
+    .replace(/[^a-zA-Z0-9-_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '') || fallback;
+
+  const extension = (fileName || '').includes('.')
+    ? String(fileName.split('.').pop()).toLowerCase()
+    : 'png';
+
+  return `${slugify(safeBase)}.${extension}`;
+}
+
+export async function persistAssetToProjectDirectory(file, directoryName = 'uploads', baseName = 'asset') {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  if (!('showDirectoryPicker' in window)) {
+    throw new Error('Directory picker is not supported in this browser.');
+  }
+
+  const root = window.__weddingProjectRoot ?? (await window.showDirectoryPicker({ mode: 'readwrite' }));
+  window.__weddingProjectRoot = root;
+
+  const publicDirectory = await root.getDirectoryHandle('public', { create: true });
+  const targetDirectory = await publicDirectory.getDirectoryHandle(directoryName, { create: true });
+
+  const finalFileName = createProjectAssetFileName(
+    file?.name || `${baseName}.png`,
+    baseName,
+  );
+
+  const fileHandle = await targetDirectory.getFileHandle(finalFileName, { create: true });
+  const writable = await fileHandle.createWritable();
+  await writable.write(file);
+  await writable.close();
+
+  return `/${directoryName}/${finalFileName}`;
+}
+
 function dataUrlToBlob(dataUrl) {
   const [header, base64Data] = dataUrl.split(',');
   const mimeType = header.match(/^data:(.*?);base64$/)?.[1] || 'image/png';

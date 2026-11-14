@@ -10,6 +10,7 @@ import {
   buildProjectAssetManifest,
   downloadProjectAssetManifest,
   exportProjectAssetsToSelectedDirectory,
+  persistAssetToProjectDirectory,
 } from './adminAssetExport';
 
 const getDefaultDraft = () => {
@@ -189,48 +190,106 @@ function AdminPage() {
 
   const handleHeroImageUpload = async (file) => {
     if (!file) return;
-    const dataUrl = await fileToDataUrl(file);
-    setDraft((current) => ({ ...current, heroImage: dataUrl }));
+
+    try {
+      const projectPath = await persistAssetToProjectDirectory(file, 'uploads', 'kapak-gorseli');
+      setDraft((current) => ({ ...current, heroImage: projectPath }));
+      setStatus('Kapak görseli proje klasörüne kaydedildi.');
+      return;
+    } catch {
+      const dataUrl = await fileToDataUrl(file);
+      setDraft((current) => ({ ...current, heroImage: dataUrl }));
+      setStatus('Klasör erişimi yok; görsel geçici olarak tarayıcıda tutuldu. Proje klasörünü tekrar seçin.');
+    }
   };
 
   const handleImageUpload = async (eventId, file) => {
     if (!file) return;
-    const dataUrl = await fileToDataUrl(file);
-    setDraft((current) => ({
-      ...current,
-      events: {
-        ...current.events,
-        [eventId]: {
-          ...current.events[eventId],
-          heroImage: dataUrl,
+
+    try {
+      const projectPath = await persistAssetToProjectDirectory(file, 'uploads', `${eventId}-hero`);
+      setDraft((current) => ({
+        ...current,
+        events: {
+          ...current.events,
+          [eventId]: {
+            ...current.events[eventId],
+            heroImage: projectPath,
+          },
         },
-      },
-    }));
+      }));
+      setStatus('Etkinlik görseli proje klasörüne kaydedildi.');
+      return;
+    } catch {
+      const dataUrl = await fileToDataUrl(file);
+      setDraft((current) => ({
+        ...current,
+        events: {
+          ...current.events,
+          [eventId]: {
+            ...current.events[eventId],
+            heroImage: dataUrl,
+          },
+        },
+      }));
+      setStatus('Klasör erişimi yok; görsel geçici olarak tarayıcıda tutuldu. Proje klasörünü tekrar seçin.');
+    }
   };
 
   const handleGalleryUpload = async (index, file) => {
     if (!file) return;
-    const dataUrl = await fileToDataUrl(file);
-    setDraft((current) => {
-      const nextGallery = [...(current.imageGallery ?? [])];
-      nextGallery[index] = dataUrl;
-      return { ...current, imageGallery: nextGallery };
-    });
+
+    try {
+      const projectPath = await persistAssetToProjectDirectory(file, 'uploads', `gallery-${index + 1}`);
+      setDraft((current) => {
+        const nextGallery = [...(current.imageGallery ?? [])];
+        nextGallery[index] = projectPath;
+        return { ...current, imageGallery: nextGallery };
+      });
+      setStatus('Galeri görseli proje klasörüne kaydedildi.');
+      return;
+    } catch {
+      const dataUrl = await fileToDataUrl(file);
+      setDraft((current) => {
+        const nextGallery = [...(current.imageGallery ?? [])];
+        nextGallery[index] = dataUrl;
+        return { ...current, imageGallery: nextGallery };
+      });
+      setStatus('Klasör erişimi yok; görsel geçici olarak tarayıcıda tutuldu. Proje klasörünü tekrar seçin.');
+    }
   };
 
   const handleMusicUpload = async (eventId, file) => {
     if (!file) return;
-    const dataUrl = await fileToDataUrl(file);
-    setDraft((current) => ({
-      ...current,
-      musicByEvent: {
-        ...current.musicByEvent,
-        [eventId]: {
-          ...(current.musicByEvent[eventId] ?? {}),
-          url: dataUrl,
+
+    try {
+      const projectPath = await persistAssetToProjectDirectory(file, 'audio', `${eventId}-music`);
+      setDraft((current) => ({
+        ...current,
+        musicByEvent: {
+          ...current.musicByEvent,
+          [eventId]: {
+            ...(current.musicByEvent[eventId] ?? {}),
+            url: projectPath,
+          },
         },
-      },
-    }));
+      }));
+      setStatus('Müzik dosyası proje klasörüne kaydedildi.');
+      return;
+    } catch {
+      const dataUrl = await fileToDataUrl(file);
+      setDraft((current) => ({
+        ...current,
+        musicByEvent: {
+          ...current.musicByEvent,
+          [eventId]: {
+            ...(current.musicByEvent[eventId] ?? {}),
+            url: dataUrl,
+          },
+        },
+      }));
+      setStatus('Klasör erişimi yok; müzik geçici olarak tarayıcıda tutuldu. Proje klasörünü tekrar seçin.');
+    }
   };
 
   const handleSave = () => {
@@ -447,10 +506,23 @@ function AdminPage() {
                                 type="file"
                                 accept="image/*"
                                 className="hidden"
-                                onChange={(inputEvent) => {
+                                onChange={async (inputEvent) => {
                                   const file = inputEvent.target.files?.[0];
                                   if (!file) return;
-                                  fileToDataUrl(file).then((dataUrl) => {
+
+                                  try {
+                                    const projectPath = await persistAssetToProjectDirectory(file, 'uploads', `${eventId}-story-${index + 1}`);
+                                    setDraft((current) => {
+                                      const next = { ...(current.storyByEvent ?? {}) };
+                                      const items = [...((next[eventId]?.items) ?? [])];
+                                      items[index] = { ...items[index], image: projectPath };
+                                      next[eventId] = { ...(next[eventId] ?? {}), items };
+                                      return { ...current, storyByEvent: next };
+                                    });
+                                    setStatus('Hikâye görseli proje klasörüne kaydedildi.');
+                                    return;
+                                  } catch {
+                                    const dataUrl = await fileToDataUrl(file);
                                     setDraft((current) => {
                                       const next = { ...(current.storyByEvent ?? {}) };
                                       const items = [...((next[eventId]?.items) ?? [])];
@@ -458,7 +530,8 @@ function AdminPage() {
                                       next[eventId] = { ...(next[eventId] ?? {}), items };
                                       return { ...current, storyByEvent: next };
                                     });
-                                  });
+                                    setStatus('Klasör erişimi yok; hikâye görseli geçici olarak tarayıcıda tutuldu.');
+                                  }
                                 }}
                               />
                             </label>
