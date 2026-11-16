@@ -1,8 +1,11 @@
 import { ChevronDown } from 'lucide-react';
 import { getWeddingConfig } from '../config';
 
-function Faq() {
+function Faq({ activeEventId }) {
   const config = getWeddingConfig();
+  const eventId = activeEventId ?? config.defaultEventId;
+  const items = config.faqsByEvent?.[eventId] ?? config.faqs ?? [];
+
   return (
     <section id="faq" className="section-shell">
       <div className="mx-auto max-w-4xl">
@@ -12,8 +15,8 @@ function Faq() {
         </div>
 
         <div className="space-y-3">
-          {config.faqs.map((item) => (
-            <details key={item.question} className="group overflow-hidden rounded-[1.4rem] border border-[#ebdcca] bg-white/80 p-2 shadow-[0_10px_30px_rgba(95,76,56,0.03)]">
+          {items.map((item) => (
+            <details key={`${eventId}-${item.question}`} className="group overflow-hidden rounded-[1.4rem] border border-[#ebdcca] bg-white/80 p-2 shadow-[0_10px_30px_rgba(95,76,56,0.03)]">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-3 text-left text-base font-medium text-[#2d2420] sm:p-4 sm:text-lg">
                 {item.question}
                 <ChevronDown className="transition group-open:rotate-180" size={18} />

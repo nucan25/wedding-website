@@ -1,5 +1,32 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { getWeddingConfig } from '../config';
+
+function StoryImage({ src, alt, className, fullPortrait = false }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
+  return (
+    <div className="relative overflow-hidden rounded-[1.5rem] bg-[#f1ece7]">
+      {!isLoaded && <div className="absolute inset-0 animate-pulse bg-[#efe7df]" />}
+      <img
+        key={src}
+        src={src}
+        alt={alt}
+        width="720"
+        height="540"
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        className={`${className} object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ objectPosition: fullPortrait ? '50% 20%' : '50% 52%' }}
+      />
+    </div>
+  );
+}
 
 function Story({ activeEventId }) {
   const config = getWeddingConfig();
@@ -30,7 +57,10 @@ function Story({ activeEventId }) {
         </div>
 
         <div className="space-y-6">
-          {currentStory.items.map((item, index) => (
+          {currentStory.items.map((item, index) => {
+            const isFullPortrait = item.title === 'İsteme Merasimi';
+
+            return (
             <motion.article
               key={`${currentEventId}-${item.year}-${item.title}-${index}`}
               initial={{ opacity: 0, y: 26 }}
@@ -39,23 +69,20 @@ function Story({ activeEventId }) {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="grid items-center gap-5 overflow-hidden rounded-[2rem] border border-[#ebdcca] bg-white/70 p-4 shadow-[0_18px_40px_rgba(86,74,62,0.04)] sm:grid-cols-[1.15fr_1.85fr] sm:p-5"
             >
-              <div className="overflow-hidden rounded-[1.5rem] bg-[#f1ece7]">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  width="720"
-                  height="540"
-                  loading="lazy"
-                  className="h-56 w-full object-cover sm:h-64"
-                />
-              </div>
+              <StoryImage
+                src={item.image}
+                alt={item.title}
+                className="h-56 w-full sm:h-64"
+                fullPortrait={isFullPortrait}
+              />
               <div className="px-1 sm:px-4">
                 <span className="text-xs font-medium uppercase tracking-[0.24em] text-[#7a9280]">{item.year}</span>
                 <h3 className="mt-3 font-display text-3xl text-[#2d2420]">{item.title}</h3>
                 <p className="mt-3 text-base leading-7 text-[#4d4642]">{item.text}</p>
               </div>
             </motion.article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

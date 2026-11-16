@@ -82,7 +82,7 @@ function App() {
       <Program activeEvent={activeEvent} />
       <Venue activeEvent={activeEvent} />
       <PhotoShare />
-      <Faq />
+      <Faq activeEventId={activeEvent.id} />
       <Footer />
     </div>
   );

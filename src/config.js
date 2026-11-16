@@ -286,11 +286,48 @@ const defaultConfig = {
       ],
     },
   },
+  programByEvent: {
+    'event-wedding': [
+      { time: '18:00', title: 'Karşılama', description: 'TODO: Misafirlerimize sıcak bir karşılama ve kokteyl.' },
+      { time: '19:00', title: 'Tören', description: 'TODO: Nikâh ve söz töreni detayları.' },
+      { time: '20:00', title: 'Yemek', description: 'TODO: Akşam yemeği ve kutlamanın başlangıcı.' },
+      { time: '21:00', title: 'Dans', description: 'TODO: Eğlence, dans ve sonradan başlayan coşku.' },
+    ],
+    'event-kina': [
+      { time: '19:30', title: 'Karşılama', description: 'TODO: Kına gecesi için aile dost karşılama ve hoş geldin.' },
+      { time: '20:00', title: 'Kına Töreni', description: 'TODO: Kına töreni ve kısa sözler.' },
+      { time: '21:00', title: 'Aile Sohbeti', description: 'TODO: Aileler arası sıcak ve samimi sohbet.' },
+    ],
+    'event-gelin-cikarma': [
+      { time: '10:00', title: 'Hazırlık', description: 'TODO: Sabah hazırlık ve aile koşturması.' },
+      { time: '11:00', title: 'Yolculuk', description: 'TODO: Gelin çıkarmaya doğru hareket etme ve gurur anı.' },
+      { time: '12:00', title: 'Ayrılık Anı', description: 'TODO: Aile ve yakınların son kez bir araya geldiği özel an.' },
+    ],
+  },
+  faqsByEvent: {
+    'event-wedding': [
+      { question: 'Kıyafet kodu nedir?', answer: 'TODO: Kıyafet kodu açıklaması; örn. “Resmî / şık ve rahat.”' },
+      { question: 'Çocuklar katılabilir mi?', answer: 'TODO: Çocuk kabulü bilgisi ve uygunluk notu.' },
+      { question: 'Otopark var mı?', answer: 'TODO: Otopark, ulaşım ve park etme boşluğu bilgisi.' },
+      { question: 'Hava durumu için ne bilmeliyim?', answer: 'TODO: Hava koşullarına göre öneriler; örn. akşamda hafif bir hırka.' },
+      { question: 'Konaklama önerisi var mı?', answer: 'TODO: Yakın otel veya konaklama önerileri.' },
+    ],
+    'event-kina': [
+      { question: 'Kına gecesine kimler katılabilir?', answer: 'TODO: Kına gecesinde aile ve yakın misafirler için özel davet bilgisi.' },
+      { question: 'Kıyafet kodu nedir?', answer: 'TODO: Kına gecesi için uygun şık ve rahat kıyafetler.' },
+      { question: 'Akşam ne zaman başlıyor?', answer: 'TODO: Kına gecesi başlangıç saatini belirtin.' },
+    ],
+    'event-gelin-cikarma': [
+      { question: 'Sabah saat kaçta başlıyor?', answer: 'TODO: Gelin çıkarma için sabah saat bilgisi.' },
+      { question: 'Yolculuk için hazırlık gerekli mi?', answer: 'TODO: Duyuru ve hazırlık bilgisi.' },
+      { question: 'Aileler nereye gelecek?', answer: 'TODO: Toplanma noktası veya etkinlik adresi bilgisi.' },
+    ],
+  },
   program: [
-    { time: '16:00', title: 'Karşılama', description: 'TODO: Misafirlerimize sıcak bir karşılama ve kokteyl.' },
-    { time: '17:00', title: 'Tören', description: 'TODO: Nikâh ve söz töreni detayları.' },
-    { time: '18:30', title: 'Yemek', description: 'TODO: Akşam yemeği ve kutlamanın başlangıcı.' },
-    { time: '20:00', title: 'Dans', description: 'TODO: Eğlence, dans ve sonradan başlayan coşku.' },
+    { time: '18:00', title: 'Karşılama', description: 'TODO: Misafirlerimize sıcak bir karşılama ve kokteyl.' },
+    { time: '19:00', title: 'Tören', description: 'TODO: Nikâh ve söz töreni detayları.' },
+    { time: '20:00', title: 'Yemek', description: 'TODO: Akşam yemeği ve kutlamanın başlangıcı.' },
+    { time: '21:00', title: 'Dans', description: 'TODO: Eğlence, dans ve sonradan başlayan coşku.' },
   ],
   faqs: [
     { question: 'Kıyafet kodu nedir?', answer: 'TODO: Kıyafet kodu açıklaması; örn. “Resmî / şık ve rahat.”' },
@@ -329,10 +366,26 @@ function mergeStoryByEvent(baseStoryByEvent, overrides = {}) {
 
 export function getWeddingConfig() {
   const adminOverrides = readAdminOverrides();
+  const mergedProgramByEvent = {
+    ...defaultConfig.programByEvent,
+    ...(adminOverrides.programByEvent ?? {}),
+  };
+  const mergedFaqsByEvent = {
+    ...defaultConfig.faqsByEvent,
+    ...(adminOverrides.faqsByEvent ?? {}),
+  };
 
   return {
     ...defaultConfig,
     ...adminOverrides,
+    programByEvent: mergedProgramByEvent,
+    faqsByEvent: mergedFaqsByEvent,
+    program: Array.isArray(adminOverrides.program)
+      ? adminOverrides.program
+      : mergedProgramByEvent[defaultConfig.defaultEventId] ?? defaultConfig.program,
+    faqs: Array.isArray(adminOverrides.faqs)
+      ? adminOverrides.faqs
+      : mergedFaqsByEvent[defaultConfig.defaultEventId] ?? defaultConfig.faqs,
     musicByEvent: {
       ...defaultConfig.musicByEvent,
       ...(adminOverrides.musicByEvent ?? {}),

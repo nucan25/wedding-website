@@ -1,7 +1,12 @@
 import { CalendarPlus, Clock3, MapPin, Navigation } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getWeddingConfig } from '../config';
 
 function Program({ activeEvent }) {
+  const config = getWeddingConfig();
+  const activeEventId = activeEvent?.id ?? config.defaultEventId;
+  const program = config.programByEvent?.[activeEventId] ?? config.program ?? [];
+
   return (
     <section id="program" className="section-shell">
       <div className="mx-auto max-w-5xl">
@@ -74,6 +79,20 @@ function Program({ activeEvent }) {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-5 space-y-3">
+            {program.map((item) => (
+              <div key={`${activeEventId}-${item.title}-${item.time}`} className="rounded-[1rem] border border-[#eadfce] bg-[#f9f5f1] p-4">
+                <div className="grid gap-3 md:grid-cols-[150px_1fr] md:items-center">
+                  <p className="text-lg font-semibold text-[#2d2420]">{item.time}</p>
+                  <div>
+                    <p className="text-xl font-medium text-[#2d2420]">{item.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#524b47]">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <p className="mt-5 text-base leading-7 text-[#524b47]">{activeEvent.description}</p>

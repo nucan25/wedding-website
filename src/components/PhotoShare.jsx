@@ -66,20 +66,6 @@ function PhotoShare() {
           </div>
         </div>
 
-        {galleryImages.length > 0 && (
-          <div className="mt-10">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#685d58]">Düğün kareleri</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {galleryImages.map((image, index) => (
-                <div key={`${image}-${index}`} className="overflow-hidden rounded-[1.5rem] border border-[#ebdcca] bg-white p-2 shadow-[0_18px_36px_rgba(86,74,62,0.05)]">
-                  <img src={image} alt={`Düğün fotoğrafı ${index + 1}`} className="h-64 w-full rounded-[1.1rem] object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

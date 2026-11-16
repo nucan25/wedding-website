@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import { collectProjectAssetEntries, buildProjectAssetManifest, normalizeImageGallery } from './adminAssetExport.js';
 import { getProgramEvents } from './eventData.js';
+import { getWeddingConfig } from './config.js';
 
 const sampleConfig = {
   heroImage: 'data:image/png;base64,AAAA',
@@ -58,6 +59,19 @@ test('normalizeImageGallery keeps existing photos and appends new ones without l
   const finalGallery = normalizeImageGallery(nextGallery);
 
   assert.deepEqual(finalGallery, ['https://example.com/existing-1.jpg', 'https://example.com/existing-2.jpg', 'https://example.com/new-3.jpg']);
+});
+
+test('event-specific program and FAQ data are available for each event', () => {
+  const config = getWeddingConfig();
+
+  assert.ok(Array.isArray(config.programByEvent?.['event-wedding']));
+  assert.ok(Array.isArray(config.programByEvent?.['event-kina']));
+  assert.ok(Array.isArray(config.programByEvent?.['event-gelin-cikarma']));
+  assert.ok(Array.isArray(config.faqsByEvent?.['event-wedding']));
+  assert.ok(Array.isArray(config.faqsByEvent?.['event-kina']));
+  assert.ok(Array.isArray(config.faqsByEvent?.['event-gelin-cikarma']));
+  assert.equal(config.programByEvent['event-wedding'][0].title, 'Karşılama');
+  assert.equal(config.faqsByEvent['event-kina'][0].question.includes('Kıyafet'), true);
 });
 
 test('directions links use current-location route format and never repeat the destination as origin', () => {

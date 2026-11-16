@@ -23,6 +23,7 @@ const getDefaultDraft = () => {
     heroImage: config.heroImage,
     musicByEvent: { ...config.musicByEvent },
     program: JSON.parse(JSON.stringify(config.program ?? [])),
+    programByEvent: JSON.parse(JSON.stringify(config.programByEvent ?? {})),
     events: Object.fromEntries(
       Object.entries(config.events).map(([eventId, event]) => [
         eventId,
@@ -42,6 +43,7 @@ const getDefaultDraft = () => {
     storyByEvent: JSON.parse(JSON.stringify(config.storyByEvent ?? {})),
     imageGallery: [...(config.imageGallery ?? [])],
     faqs: JSON.parse(JSON.stringify(config.faqs ?? [])),
+    faqsByEvent: JSON.parse(JSON.stringify(config.faqsByEvent ?? {})),
   };
 };
 
@@ -62,6 +64,7 @@ function readSavedDraft() {
       heroImage: saved.heroImage || base.heroImage,
       musicByEvent: { ...base.musicByEvent, ...(saved.musicByEvent ?? {}) },
       program: saved.program || base.program,
+      programByEvent: { ...base.programByEvent, ...(saved.programByEvent ?? {}) },
       events: Object.fromEntries(
         Object.entries(base.events).map(([eventId, event]) => [
           eventId,
@@ -76,6 +79,7 @@ function readSavedDraft() {
       storyByEvent: saved.storyByEvent || base.storyByEvent,
       imageGallery: normalizeImageGallery(saved.imageGallery ?? base.imageGallery),
       faqs: saved.faqs || base.faqs,
+      faqsByEvent: { ...base.faqsByEvent, ...(saved.faqsByEvent ?? {}) },
     };
   } catch {
     return getDefaultDraft();
@@ -207,6 +211,66 @@ function AdminPage() {
     });
   };
 
+  const updateEventProgramItem = (eventId, index, field, value) => {
+    setDraft((current) => {
+      const nextPrograms = { ...(current.programByEvent ?? {}) };
+      const items = [...((nextPrograms[eventId] ?? []) || [])];
+      items[index] = { ...(items[index] ?? {}), [field]: value };
+      nextPrograms[eventId] = items;
+      return { ...current, programByEvent: nextPrograms };
+    });
+  };
+
+  const updateEventFaq = (eventId, index, field, value) => {
+    setDraft((current) => {
+      const nextFaqsByEvent = { ...(current.faqsByEvent ?? {}) };
+      const items = [...((nextFaqsByEvent[eventId] ?? []) || [])];
+      items[index] = { ...(items[index] ?? {}), [field]: value };
+      nextFaqsByEvent[eventId] = items;
+      return { ...current, faqsByEvent: nextFaqsByEvent };
+    });
+  };
+
+  const addProgramItem = (eventId) => {
+    setDraft((current) => {
+      const nextPrograms = { ...(current.programByEvent ?? {}) };
+      const items = [...((nextPrograms[eventId] ?? []) || [])];
+      items.push({ time: '00:00', title: 'Yeni etkinlik', description: 'Açıklama ekleyin.' });
+      nextPrograms[eventId] = items;
+      return { ...current, programByEvent: nextPrograms };
+    });
+  };
+
+  const removeProgramItem = (eventId, index) => {
+    setDraft((current) => {
+      const nextPrograms = { ...(current.programByEvent ?? {}) };
+      const items = [...((nextPrograms[eventId] ?? []) || [])];
+      items.splice(index, 1);
+      nextPrograms[eventId] = items;
+      return { ...current, programByEvent: nextPrograms };
+    });
+  };
+
+  const addFaqItem = (eventId) => {
+    setDraft((current) => {
+      const nextFaqs = { ...(current.faqsByEvent ?? {}) };
+      const items = [...((nextFaqs[eventId] ?? []) || [])];
+      items.push({ question: 'Yeni soru', answer: 'Cevap yazın.' });
+      nextFaqs[eventId] = items;
+      return { ...current, faqsByEvent: nextFaqs };
+    });
+  };
+
+  const removeFaqItem = (eventId, index) => {
+    setDraft((current) => {
+      const nextFaqs = { ...(current.faqsByEvent ?? {}) };
+      const items = [...((nextFaqs[eventId] ?? []) || [])];
+      items.splice(index, 1);
+      nextFaqs[eventId] = items;
+      return { ...current, faqsByEvent: nextFaqs };
+    });
+  };
+
   const registerPendingUpload = (key, file) => {
     if (!file) return;
 
@@ -292,11 +356,13 @@ function AdminPage() {
       heroImage: draft.heroImage,
       musicByEvent: draft.musicByEvent,
       program: draft.program,
+      programByEvent: draft.programByEvent,
       events: draft.events,
       storyIntro: draft.storyIntro,
       storyByEvent: draft.storyByEvent,
       imageGallery: draft.imageGallery,
       faqs: draft.faqs,
+      faqsByEvent: draft.faqsByEvent,
     };
 
     const entries = Object.entries(pendingUploads);
@@ -588,13 +654,28 @@ function AdminPage() {
 
           <section className="rounded-[1.5rem] border border-[#ebdcca] bg-[#fffaf5] p-4 sm:p-5">
             <h2 className="font-display text-3xl text-[#2d2420]">Program</h2>
-            <div className="mt-5 space-y-4">
-              {(draft.program ?? []).map((item, index) => (
-                <div key={`${item.title}-${index}`} className="rounded-[1.2rem] border border-[#d7cec4] bg-white p-3">
-                  <div className="grid gap-3 md:grid-cols-3">
-                    <input value={item.time} onChange={(event) => setDraft((current) => ({ ...current, program: current.program.map((row, rowIndex) => rowIndex === index ? { ...row, time: event.target.value } : row) }))} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
-                    <input value={item.title} onChange={(event) => setDraft((current) => ({ ...current, program: current.program.map((row, rowIndex) => rowIndex === index ? { ...row, title: event.target.value } : row) }))} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
-                    <input value={item.description} onChange={(event) => setDraft((current) => ({ ...current, program: current.program.map((row, rowIndex) => rowIndex === index ? { ...row, description: event.target.value } : row) }))} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280] md:col-span-3" />
+            <div className="mt-5 space-y-6">
+              {orderedEventBlocks.map(({ eventId, event }) => (
+                <div key={`${eventId}-program-editor`} className="rounded-[1.2rem] border border-[#d7cec4] bg-white p-3">
+                  <h3 className="mb-3 font-display text-2xl text-[#2d2420]">{event.title}</h3>
+                  {(draft.programByEvent?.[eventId] ?? []).map((item, index) => (
+                    <div key={`${eventId}-${item.title}-${index}`} className="mb-3 rounded-[1rem] border border-[#d7cec4] bg-[#fffaf5] p-3">
+                      <div className="grid gap-3 md:grid-cols-3">
+                        <input value={item.time} onChange={(eventValue) => updateEventProgramItem(eventId, index, 'time', eventValue.target.value)} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
+                        <input value={item.title} onChange={(eventValue) => updateEventProgramItem(eventId, index, 'title', eventValue.target.value)} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
+                        <input value={item.description} onChange={(eventValue) => updateEventProgramItem(eventId, index, 'description', eventValue.target.value)} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280] md:col-span-3" />
+                      </div>
+                      <div className="mt-3 flex justify-end">
+                        <button type="button" onClick={() => removeProgramItem(eventId, index)} className="rounded-full border border-[#d4b9a6] bg-white px-3 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-[#433b39]">
+                          Kaldır
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="mt-3 flex justify-end">
+                    <button type="button" onClick={() => addProgramItem(eventId)} className="rounded-full bg-[#2f2a27] px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] text-[#f8f3ee]">
+                      Program satırı ekle
+                    </button>
                   </div>
                 </div>
               ))}
@@ -628,11 +709,26 @@ function AdminPage() {
 
           <section className="rounded-[1.5rem] border border-[#ebdcca] bg-[#fffaf5] p-4 sm:p-5">
             <h2 className="font-display text-3xl text-[#2d2420]">Sık sorulan sorular</h2>
-            <div className="mt-5 space-y-4">
-              {(draft.faqs ?? []).map((item, index) => (
-                <div key={`${item.question}-${index}`} className="rounded-[1.2rem] border border-[#d7cec4] bg-white p-3">
-                  <input value={item.question} onChange={(event) => updateFaq(index, 'question', event.target.value)} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
-                  <textarea value={item.answer} onChange={(event) => updateFaq(index, 'answer', event.target.value)} className="mt-3 min-h-[90px] w-full rounded-[1rem] border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
+            <div className="mt-5 space-y-6">
+              {orderedEventBlocks.map(({ eventId, event }) => (
+                <div key={`${eventId}-faq-editor`} className="rounded-[1.2rem] border border-[#d7cec4] bg-white p-3">
+                  <h3 className="mb-3 font-display text-2xl text-[#2d2420]">{event.title}</h3>
+                  {(draft.faqsByEvent?.[eventId] ?? []).map((item, index) => (
+                    <div key={`${eventId}-${item.question}-${index}`} className="mb-3 rounded-[1rem] border border-[#d7cec4] bg-[#fffaf5] p-3">
+                      <input value={item.question} onChange={(eventValue) => updateEventFaq(eventId, index, 'question', eventValue.target.value)} className="w-full rounded-full border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
+                      <textarea value={item.answer} onChange={(eventValue) => updateEventFaq(eventId, index, 'answer', eventValue.target.value)} className="mt-3 min-h-[90px] w-full rounded-[1rem] border border-[#d8c6b1] bg-white px-3 py-2 text-sm outline-none focus:border-[#7a9280]" />
+                      <div className="mt-3 flex justify-end">
+                        <button type="button" onClick={() => removeFaqItem(eventId, index)} className="rounded-full border border-[#d4b9a6] bg-white px-3 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-[#433b39]">
+                          Kaldır
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="mt-3 flex justify-end">
+                    <button type="button" onClick={() => addFaqItem(eventId)} className="rounded-full bg-[#2f2a27] px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] text-[#f8f3ee]">
+                      Soru ekle
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

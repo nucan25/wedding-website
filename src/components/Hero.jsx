@@ -7,6 +7,7 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
   const config = getWeddingConfig();
   const [partnerOne, partnerTwo] = config.couple;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHeroLoaded, setIsHeroLoaded] = useState(false);
   const audioRef = useRef(null);
 
   const heroImage = activeEvent?.heroImage || config.heroImage;
@@ -20,6 +21,10 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
     { id: 'event-kina', label: config.events['event-kina']?.buttonLabel || 'Kına' },
     { id: 'event-gelin-cikarma', label: config.events['event-gelin-cikarma']?.buttonLabel || 'Gelin Çıkarma' },
   ];
+
+  useEffect(() => {
+    setIsHeroLoaded(false);
+  }, [heroImage]);
 
   useEffect(() => {
     if (!audioRef.current || !audioSource) return;
@@ -54,12 +59,17 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
       <audio ref={audioRef} loop />
 
       <div className="absolute inset-0">
+        {!isHeroLoaded && <div className="absolute inset-0 animate-pulse bg-[#efe7df]" />}
         <img
+          key={heroImage}
           src={heroImage}
           alt={heroAlt}
-          className="h-full w-full object-cover opacity-35 blur-[1px]"
+          onLoad={() => setIsHeroLoaded(true)}
+          className={`h-full w-full object-cover opacity-35 blur-[1px] transition-opacity duration-300 ${isHeroLoaded ? 'opacity-35' : 'opacity-0'}`}
           width="1440"
           height="960"
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#f7f3ee]/35 via-[#f7f3ee]/55 to-[#f7f3ee]" />
       </div>
@@ -73,12 +83,17 @@ function Hero({ activeEvent, activeEventId, onSelectEvent }) {
         >
           <div className="mb-4 flex justify-center">
             <div className="overflow-hidden rounded-[32px] border border-[#d9c9b9] bg-white/80 p-2 shadow-[0_24px_48px_rgba(86,67,54,0.12)] backdrop-blur-sm sm:p-2.5">
+              {!isHeroLoaded && <div className="absolute inset-0 animate-pulse bg-[#efe7df]" />}
               <img
+                key={`${heroImage}-avatar`}
                 src={heroImage}
                 alt={heroAlt}
-                className="h-44 w-44 rounded-[28px] object-cover sm:h-52 sm:w-52 lg:h-64 lg:w-64"
+                onLoad={() => setIsHeroLoaded(true)}
+                className={`h-44 w-44 rounded-[28px] object-cover transition-opacity duration-300 sm:h-52 sm:w-52 lg:h-64 lg:w-64 ${isHeroLoaded ? 'opacity-100' : 'opacity-0'}`}
                 width="256"
                 height="256"
+                loading="eager"
+                decoding="async"
               />
             </div>
           </div>
